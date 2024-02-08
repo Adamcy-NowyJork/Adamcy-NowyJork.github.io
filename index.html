@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+*{
+	background-color: black;
+    text-align: center;
+    font-size: 60px;
+    margin-top: 0px;
+    color:white;
+}
+
+* {
+    pointer-events: none;
+	    user-select: none;
+
+}
+
+
+
+
+.wrapper {
+		  position: relative;
+		  width: 728px;
+		  height: 410px
+    text-align: center;
+	margin:auto;
+		}
+
+		/* Wideo */
+
+		video {
+		  width: 100%;
+		  height: 100%;
+		}
+
+		/* Przycisk */
+
+		.play-button {
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		  z-index: 1;
+		  
+		  pointer-events: auto;
+	    user-select: auto;
+
+		  
+		  /* Wygląd przycisku */
+		  
+		  background-color: rgba(255, 0, 0, 0.35);
+		  color: white;
+		  font-size: 54px;
+		  font-weight: bold;
+		  padding: 20px 30px;
+		  border: none;
+		  cursor: pointer;
+		}
+		
+		
+		.play-button:hover {
+			background-color: rgba(255, 0, 0, 0.55);
+		}
+
+</style>
+</head>
+<body>
+<div> ‎</div>
+<h1>Do Nowego Jorku pozostało...</h1>
+<p id="demo">‎‏‏‎ ‎</p>
+
+
+
+<div class="wrapper" id="wrapper">
+	<video id="video" muted loop oncontextmenu="return false;" style="pointer-events: auto; user-select: auto;">
+		<source src="ny10.mp4" type="video/mp4">
+		Your browser does not support the video tag.
+	</video>
+	<button class="play-button" id="play-button">▶</button>
+</div>
+
+
+
+
+<div> ‎</div>
+<img src="loading.gif" width="50px" height="50px" style="opacity:0.5; pointer-events: auto; user-select: auto;" id="loading"></img>
+<div id="footer" style="font-size:18px;opacity:0.5"></div>
+<script>
+var countDownDate = new Date(2024,3,1).getTime();
+var x = setInterval(function() {
+
+  var now = new Date().getTime();
+    
+  var distance = countDownDate - now;
+    
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  document.getElementById("demo").innerHTML = days + "dni    " + hours + "h    "
+  + minutes + "m    " + seconds + "s    ";
+    
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "aha";
+  }
+}, 1000);
+
+
+document.getElementById("play-button").addEventListener("click", function(){
+	const video = document.getElementById("video");
+	video.play();
+	video.muted = false;
+	document.getElementById("play-button").style="visibility:hidden;";
+});
+
+
+
+document.getElementById("video").addEventListener("click", function(){
+	const video = document.getElementById("video");
+	if(video.paused){
+		video.play();
+		video.muted = false;
+		document.getElementById("play-button").style="visibility:hidden;";
+	}else{
+		document.getElementById("play-button").style="visibility:visible;";
+		video.pause();
+	}
+});
+
+
+document.getElementById("loading").addEventListener("mouseover", function(){
+	document.getElementById("footer").innerHTML="Nic tutaj sie nie wczytuje xD";
+});
+
+document.getElementById("loading").addEventListener("mouseout", function(){
+	document.getElementById("footer").innerHTML="";
+});
+</script>
+
+<!--script>
+        const video = document.getElementById("video");
+
+        // Symulacja naciśnięcia przycisku "play" po załadowaniu strony
+        window.addEventListener("load", () => {
+            video.play();
+        });
+		
+		window.addEventListener("load", () => {
+            video.muted = false;
+        });
+    </script>-->
+<script>
+    document.addEventListener("contextmenu", function(e){
+            e.preventDefault();
+        }, false);
+</script>
+</body>
+</html>
